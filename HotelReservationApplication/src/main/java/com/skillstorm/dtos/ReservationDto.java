@@ -4,11 +4,13 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Objects;
 
+import com.skillstorm.models.Room;
 import com.skillstorm.models.User;
+
 
 public class ReservationDto {
 	
-    private Long id;
+    private int id;
 	
     private ZonedDateTime  checkInDate;
 	
@@ -22,17 +24,18 @@ public class ReservationDto {
 	
     private String reservationStatus;
 	
-    private Room room;
+    private int roomId;
 	
-    private User user;
+    private Long userId;
 
     
 	public ReservationDto() {
 		
 	}
 
-	public ReservationDto(Long id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
-			ZonedDateTime bookingDate, BigDecimal totalPrice, String reservationStatus, Room room, User user) {
+
+	public ReservationDto(int id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
+			ZonedDateTime bookingDate, BigDecimal totalPrice, String reservationStatus, int roomId, Long userId) {
 		super();
 		this.id = id;
 		this.checkInDate = checkInDate;
@@ -41,89 +44,107 @@ public class ReservationDto {
 		this.bookingDate = bookingDate;
 		this.totalPrice = totalPrice;
 		this.reservationStatus = reservationStatus;
-		this.room = room;
-		this.user = user;
+		this.roomId = roomId;
+		this.userId = userId;
 	}
-	
 
-	public Long getId() {
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+
+	public void setId(int id) {
 		this.id = id;
 	}
+
 
 	public ZonedDateTime getCheckInDate() {
 		return checkInDate;
 	}
 
+
 	public void setCheckInDate(ZonedDateTime checkInDate) {
 		this.checkInDate = checkInDate;
 	}
+
 
 	public ZonedDateTime getCheckOutDate() {
 		return checkOutDate;
 	}
 
+
 	public void setCheckOutDate(ZonedDateTime checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
+
 
 	public Integer getNumGuests() {
 		return numGuests;
 	}
 
+
 	public void setNumGuests(Integer numGuests) {
 		this.numGuests = numGuests;
 	}
+
 
 	public ZonedDateTime getBookingDate() {
 		return bookingDate;
 	}
 
+
 	public void setBookingDate(ZonedDateTime bookingDate) {
 		this.bookingDate = bookingDate;
 	}
+
 
 	public BigDecimal getTotalPrice() {
 		return totalPrice;
 	}
 
+
 	public void setTotalPrice(BigDecimal totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
 
 	public String getReservationStatus() {
 		return reservationStatus;
 	}
 
+
 	public void setReservationStatus(String reservationStatus) {
 		this.reservationStatus = reservationStatus;
 	}
 
-	public Room getRoom() {
-		return room;
+
+	public int getRoomId() {
+		return roomId;
 	}
 
-	public void setRoom(Room room) {
-		this.room = room;
+
+	public void setRoomId(int roomId) {
+		this.roomId = roomId;
 	}
 
-	public User getUser() {
-		return user;
+
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bookingDate, checkInDate, checkOutDate, id, numGuests, reservationStatus, totalPrice, user);
+		return Objects.hash(bookingDate, checkInDate, checkOutDate, id, numGuests, reservationStatus, roomId,
+				totalPrice, userId);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -135,19 +156,24 @@ public class ReservationDto {
 			return false;
 		ReservationDto other = (ReservationDto) obj;
 		return Objects.equals(bookingDate, other.bookingDate) && Objects.equals(checkInDate, other.checkInDate)
-				&& Objects.equals(checkOutDate, other.checkOutDate) && Objects.equals(id, other.id)
+				&& Objects.equals(checkOutDate, other.checkOutDate) && id == other.id
 				&& Objects.equals(numGuests, other.numGuests)
-				&& Objects.equals(reservationStatus, other.reservationStatus)
-				&& Objects.equals(totalPrice, other.totalPrice) && Objects.equals(user, other.user);
+				&& Objects.equals(reservationStatus, other.reservationStatus) && roomId == other.roomId
+				&& Objects.equals(totalPrice, other.totalPrice) && Objects.equals(userId, other.userId);
 	}
+
 
 	@Override
 	public String toString() {
 		return "ReservationDto [id=" + id + ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate
 				+ ", numGuests=" + numGuests + ", bookingDate=" + bookingDate + ", totalPrice=" + totalPrice
-				+ ", reservationStatus=" + reservationStatus + ", user=" + user + "]";
+				+ ", reservationStatus=" + reservationStatus + ", roomId=" + roomId + ", userId=" + userId + "]";
 	}
 
+	
+	
+
+	
 	
     
     

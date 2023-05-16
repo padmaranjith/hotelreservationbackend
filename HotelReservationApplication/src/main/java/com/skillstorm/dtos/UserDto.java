@@ -3,6 +3,7 @@ package com.skillstorm.dtos;
 import java.util.Objects;
 
 public class UserDto {
+	
 	private Long id;
 	
     private String firstName;

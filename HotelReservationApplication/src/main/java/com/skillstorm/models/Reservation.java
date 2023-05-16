@@ -22,7 +22,7 @@ public class Reservation {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "reservation_id")
-    private Long id;
+    private int id;
 	
 	@Column(name = "check_in_date")
     private ZonedDateTime  checkInDate;
@@ -54,7 +54,7 @@ public class Reservation {
 		
 	}
 	
-	public Reservation(Long id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
+	public Reservation(int id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
 			ZonedDateTime bookingDate, BigDecimal totalPrice, String reservationStatus, Room room, User user) {
 		super();
 		this.id = id;
@@ -68,11 +68,12 @@ public class Reservation {
 		this.user = user;
 	}
 	
-	public Long getId() {
+
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -141,9 +142,9 @@ public class Reservation {
 	}
 
 	public ReservationDto toDto() {
-		return new ReservationDto(id, checkInDate, checkOutDate, numGuests, bookingDate, totalPrice, reservationStatus, room.getId(), user.getId());
+		return new ReservationDto(id, checkInDate, checkOutDate, numGuests, bookingDate, totalPrice, reservationStatus, room.getRoomId(), user.getId());
 	}
-
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -165,7 +166,7 @@ public class Reservation {
 	public String toString() {
 		return "Reservation [id=" + id + ", checkInDate=" + checkInDate + ", checkOutDate=" + checkOutDate
 				+ ", numGuests=" + numGuests + ", bookingDate=" + bookingDate + ", totalPrice=" + totalPrice
-				+ ", reservationStatus=" + reservationStatus + ", user=" + user + "]";
+				+ ", reservationStatus=" + reservationStatus + ", room=" + room + ", user=" + user + "]";
 	}
 
 	
