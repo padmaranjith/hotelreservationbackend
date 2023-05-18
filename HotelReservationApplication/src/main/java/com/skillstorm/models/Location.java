@@ -23,7 +23,7 @@ public class Location {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="location_id")
-	private int locationId;
+	private int id;
 	@Column(name="city")
 	private String city;
 	@Column(name="state_province")
@@ -46,18 +46,22 @@ public class Location {
 	
 	public Location(int locationId, String city, String stateProvince, String country) {
 		super();
-		this.locationId = locationId;
+		this.id = locationId;
 		this.city = city;
 		this.stateProvince = stateProvince;
 		this.country = country;
 	}
 
-	public int getLocationId() {
-		return locationId;
+	
+	public int getId() {
+		return id;
 	}
-	public void setLocationId(int locationId) {
-		this.locationId = locationId;
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+
 	public String getCity() {
 		return city;
 	}
@@ -79,7 +83,7 @@ public class Location {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(locationId);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -91,12 +95,12 @@ public class Location {
 		if (getClass() != obj.getClass())
 			return false;
 		Location other = (Location) obj;
-		return locationId == other.locationId;
+		return id == other.id;
 	}
 
 	@Override
 	public String toString() {
-		return "Location [locationId=" + locationId + ", city=" + city + ", stateProvince=" + stateProvince
+		return "Location [locationId=" + id + ", city=" + city + ", stateProvince=" + stateProvince
 				+ ", country=" + country + "]";
 	}
 	

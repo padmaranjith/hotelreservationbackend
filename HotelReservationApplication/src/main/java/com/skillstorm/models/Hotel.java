@@ -48,6 +48,8 @@ public class Hotel {
 	private String description;
 	@Column(name="rating",precision = 3,scale = 2)
 	private BigDecimal rating;
+	@Column (name="imageurl")
+	private String imageUrl;
 	
 	@ManyToOne
 	@JoinColumn(name="location_id")
@@ -68,11 +70,16 @@ public class Hotel {
 	 * @param email
 	 * @param description
 	 * @param rating
+	 * @param imageUrl
 	 * @param location
+	 * 
 	 */
-	public Hotel(int hotelId, String hotelName, String streetName, 
-			String postalCode, String phoneNumber, String email, String description, BigDecimal rating,
-			Location location) {
+	
+	public int getHotelId() {
+		return hotelId;
+	}
+	public Hotel(int hotelId, String hotelName, String streetName, String postalCode, String phoneNumber, String email,
+			String description, BigDecimal rating, String imageUrl, Location location) {
 		super();
 		this.hotelId = hotelId;
 		this.hotelName = hotelName;
@@ -82,12 +89,8 @@ public class Hotel {
 		this.email = email;
 		this.description = description;
 		this.rating = rating;
+		this.imageUrl = imageUrl;
 		this.location = location;
-	}
-
-	
-	public int getHotelId() {
-		return hotelId;
 	}
 	public void setHotelId(int hotelId) {
 		this.hotelId = hotelId;
@@ -155,10 +158,16 @@ public class Hotel {
 		this.location = location;
 	}
 	
-	public HotelDto toDto() {
-		return new HotelDto(hotelId, hotelName, streetName, postalCode, phoneNumber, email, description, rating, location.getLocationId());
-	}
 	
+	public String getImageUrl() {
+		return imageUrl;
+	}
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+	public HotelDto toDto() {
+		return new HotelDto(hotelId, hotelName, streetName, postalCode, phoneNumber, email, description, rating, imageUrl, location.getId());
+	}
 	
 	@Override
 	public int hashCode() {
@@ -179,9 +188,9 @@ public class Hotel {
 	public String toString() {
 		return "Hotel [hotelId=" + hotelId + ", hotelName=" + hotelName + ", streetName=" + streetName + ", postalCode="
 				+ postalCode + ", phoneNumber=" + phoneNumber + ", email=" + email + ", description=" + description
-				+ ", rating=" + rating + ", location=" + location + "]";
+				+ ", rating=" + rating + ", imageUrl=" + imageUrl + ", location=" + location + "]";
 	}
-	
+
 	
 	
 	

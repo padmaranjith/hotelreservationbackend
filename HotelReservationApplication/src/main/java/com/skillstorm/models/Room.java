@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.skillstorm.dtos.RoomDto;
+
 /**
  * 
  * Room entity represents all rooms associated with the hotel
@@ -142,6 +144,9 @@ public class Room {
 				+ price + ", availability=" + availability + ", hotel=" + hotel + "]";
 	}
 
+	public RoomDto toDto() {
+		return new RoomDto(roomId, roomType, roomDescription, price, availability, roomId, hotel.getHotelId());
+	}
 	
 
 }

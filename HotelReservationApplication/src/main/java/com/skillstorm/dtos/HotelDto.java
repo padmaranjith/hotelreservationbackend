@@ -14,15 +14,16 @@ public class HotelDto {
 	private String email;
 	private String description;
 	private BigDecimal rating;
+	private String imageUrl;
 	
 	private int locationId;
 	
 	public HotelDto() {
 		
 	}
-	
+
 	public HotelDto(int hotelId, String hotelName, String streetName, String postalCode, String phoneNumber,
-			String email, String description, BigDecimal rating, int locationId) {
+			String email, String description, BigDecimal rating, String imageUrl, int locationId) {
 		super();
 		this.hotelId = hotelId;
 		this.hotelName = hotelName;
@@ -32,10 +33,9 @@ public class HotelDto {
 		this.email = email;
 		this.description = description;
 		this.rating = rating;
+		this.imageUrl = imageUrl;
 		this.locationId = locationId;
 	}
-
-
 
 	public int getHotelId() {
 		return hotelId;
@@ -100,7 +100,15 @@ public class HotelDto {
 	public void setRating(BigDecimal rating) {
 		this.rating = rating;
 	}
-	
+		
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
 	public int getLocationId() {
 		return locationId;
 	}
@@ -125,8 +133,5 @@ public class HotelDto {
 		HotelDto other = (HotelDto) obj;
 		return hotelId == other.hotelId;
 	}
-	
-	
-	
 	
 }

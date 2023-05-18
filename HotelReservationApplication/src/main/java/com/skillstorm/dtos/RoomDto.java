@@ -16,13 +16,15 @@ public class RoomDto {
 	private boolean availability;
 	
 	private int reservationId;
-	
+	private int hotelId;
 	public RoomDto() {
 		
 	}
 
+	
+
 	public RoomDto(int roomId, String roomType, String roomDescription, BigDecimal price, boolean availability,
-			int reservationId) {
+			int reservationId, int hotelId) {
 		super();
 		this.roomId = roomId;
 		this.roomType = roomType;
@@ -30,7 +32,10 @@ public class RoomDto {
 		this.price = price;
 		this.availability = availability;
 		this.reservationId = reservationId;
+		this.hotelId = hotelId;
 	}
+
+
 
 	public int getRoomId() {
 		return roomId;
@@ -103,6 +108,15 @@ public class RoomDto {
 		return availability == other.availability && Objects.equals(price, other.price)
 				&& reservationId == other.reservationId && Objects.equals(roomDescription, other.roomDescription)
 				&& roomId == other.roomId && Objects.equals(roomType, other.roomType);
+	}
+
+
+
+	public int getHotelId() {
+		return hotelId;
+	}
+	public void setHotelId(int hotelId) {
+		this.hotelId = hotelId;
 	}
 
 	
