@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.skillstorm.dtos.HotelDto;
-import com.skillstorm.dtos.RoomDto;
-import com.skillstorm.models.Hotel;
+import com.skillstorm.models.Amenities;
 import com.skillstorm.models.Location;
+import com.skillstorm.repositories.IAmenitiesRepository;
 import com.skillstorm.repositories.IHotelRepository;
 import com.skillstorm.repositories.ILocationRepository;
-import com.skillstorm.repositories.IRoomRepository;
 
 @Service
 @Transactional
@@ -24,6 +23,9 @@ public class HotelService {
 	
 	@Autowired
 	private ILocationRepository locationRepository;
+	
+	@Autowired
+	private IAmenitiesRepository amenitiesRepository;
 	
 	public List<HotelDto> getAllHotels(){
 		return hotelRepository.findAll()
@@ -44,8 +46,14 @@ public class HotelService {
 					.toList();	
 			}
 		else {
-			throw new RuntimeException("Sorry, Currently we do not have any hotels in your selected location");
-		}
+			return hotelRepository.findAll()
+					.stream()
+					.map(hotel->hotel.toDto())
+					.toList();		}
+	}
+	
+	public List<Amenities> getAllAmenitiesInHotel(int hotelId){
+		return amenitiesRepository.findAllByHotelHotelId(hotelId);
 	}
 	
 }

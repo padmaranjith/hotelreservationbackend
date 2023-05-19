@@ -39,16 +39,12 @@ public class Amenities {
 	public Amenities() {
 		
 	}
-	
-	
 	public Amenities(int amenitiesId, String amenitiesType, Hotel hotel) {
 		super();
 		this.amenitiesId = amenitiesId;
 		this.amenitiesType = amenitiesType;
 		this.hotel = hotel;
 	}
-
-
 	public int getAmenitiesId() {
 		return amenitiesId;
 	}
