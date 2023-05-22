@@ -17,14 +17,15 @@ public class RoomDto {
 	
 	private int reservationId;
 	private int hotelId;
+	
+	private String imageUrl;
+	
 	public RoomDto() {
 		
 	}
-
 	
-
 	public RoomDto(int roomId, String roomType, String roomDescription, BigDecimal price, boolean availability,
-			int reservationId, int hotelId) {
+			int reservationId, int hotelId, String imageUrl) {
 		super();
 		this.roomId = roomId;
 		this.roomType = roomType;
@@ -33,9 +34,8 @@ public class RoomDto {
 		this.availability = availability;
 		this.reservationId = reservationId;
 		this.hotelId = hotelId;
+		this.imageUrl = imageUrl;
 	}
-
-
 
 	public int getRoomId() {
 		return roomId;
@@ -84,11 +84,22 @@ public class RoomDto {
 	public void setReservationId(int reservationId) {
 		this.reservationId = reservationId;
 	}
+	
+	
+	public String getImageUrl() {
+		return imageUrl;
+	}
 
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	
 	@Override
 	public String toString() {
 		return "RoomDto [roomId=" + roomId + ", roomType=" + roomType + ", roomDescription=" + roomDescription
-				+ ", price=" + price + ", availability=" + availability + ", reservationId=" + reservationId + "]";
+				+ ", price=" + price + ", availability=" + availability + ", reservationId=" + reservationId
+				+ ", hotelId=" + hotelId + ", imageUrl=" + imageUrl + "]";
 	}
 
 	@Override
@@ -109,8 +120,6 @@ public class RoomDto {
 				&& reservationId == other.reservationId && Objects.equals(roomDescription, other.roomDescription)
 				&& roomId == other.roomId && Objects.equals(roomType, other.roomType);
 	}
-
-
 
 	public int getHotelId() {
 		return hotelId;

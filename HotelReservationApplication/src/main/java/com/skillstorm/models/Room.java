@@ -41,6 +41,8 @@ public class Room {
 	private BigDecimal price;
 	@Column(name="availability")
 	private boolean availability;
+	@Column(name="imageurl")
+	private String imageUrl;
 	
 	/*
 	 * The hotel that this room belongs to
@@ -62,19 +64,22 @@ public class Room {
 	 * @param availability
 	 * @param hotel
 	 */
+	
+
+	public int getRoomId() {
+		return roomId;
+	}
+
 	public Room(int roomId, String roomType, String roomDescription, BigDecimal price, boolean availability,
-			Hotel hotel) {
+			String imageUrl, Hotel hotel) {
 		super();
 		this.roomId = roomId;
 		this.roomType = roomType;
 		this.roomDescription = roomDescription;
 		this.price = price;
 		this.availability = availability;
+		this.imageUrl = imageUrl;
 		this.hotel = hotel;
-	}
-
-	public int getRoomId() {
-		return roomId;
 	}
 
 	public void setRoomId(int roomId) {
@@ -120,6 +125,16 @@ public class Room {
 	public void setHotel(Hotel hotel) {
 		this.hotel = hotel;
 	}
+	
+	
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
 
 	@Override
 	public int hashCode() {
@@ -138,14 +153,16 @@ public class Room {
 		return roomId == other.roomId;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Room [roomId=" + roomId + ", roomType=" + roomType + ", roomDescription=" + roomDescription + ", price="
-				+ price + ", availability=" + availability + ", hotel=" + hotel + "]";
+				+ price + ", availability=" + availability + ", imageUrl=" + imageUrl + ", hotel=" + hotel + "]";
 	}
 
 	public RoomDto toDto() {
-		return new RoomDto(roomId, roomType, roomDescription, price, availability, roomId, hotel.getHotelId());
+		return new RoomDto(roomId, roomType, roomDescription, price, availability, roomId, hotel.getHotelId(),imageUrl);
 	}
 	
 
