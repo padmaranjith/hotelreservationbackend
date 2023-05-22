@@ -33,9 +33,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 	
-	@GetMapping("/{id}")
-    public UserDto getUserById(@PathVariable Long id) {
-        return userService.getUserById(id);
+	@GetMapping("/{userId}")
+    public UserDto getUserById(@PathVariable long userId) {
+        return userService.getUserByUserId(userId);
     }
 	
 	@PostMapping
@@ -44,15 +44,15 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 	
-	@PutMapping("/{id}")
-	public UserDto updateUser(@PathVariable long id, @RequestBody UserDto userData) {
-		userData.setId(id);
+	@PutMapping("/{userId}")
+	public UserDto updateUser(@PathVariable long userId, @RequestBody UserDto userData) {
+		userData.setUserId(userId);
 		return userService.updateUser(userData);
 	}
 	
-	@DeleteMapping("/{id}")
-	public void deleteUser(@PathVariable long id) {
-		userService.deleteUser(id);
+	@DeleteMapping("/{userId}")
+	public void deleteUser(@PathVariable long userId) {
+		userService.deleteUser(userId);
 	}
 	
 	
