@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class UserDto {
 	
-	private Long id;
+	private long userId;
 	
     private String firstName;
     
@@ -22,10 +22,10 @@ public class UserDto {
 
 	}
 
-	public UserDto(Long id, String firstName, String lastName, String username, String password, String email,
+	public UserDto(long userId, String firstName, String lastName, String username, String password, String email,
 			String phoneNumber) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -34,12 +34,13 @@ public class UserDto {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Long getId() {
-		return id;
+
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
@@ -92,7 +93,7 @@ public class UserDto {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, firstName, id, lastName, password, phoneNumber, username);
+		return Objects.hash(email, firstName, lastName, password, phoneNumber, userId, username);
 	}
 
 	@Override
@@ -105,16 +106,21 @@ public class UserDto {
 			return false;
 		UserDto other = (UserDto) obj;
 		return Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(id, other.id) && Objects.equals(lastName, other.lastName)
-				&& Objects.equals(password, other.password) && Objects.equals(phoneNumber, other.phoneNumber)
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
+				&& Objects.equals(phoneNumber, other.phoneNumber) && userId == other.userId
 				&& Objects.equals(username, other.username);
 	}
 
 	@Override
 	public String toString() {
-		return "UserDto [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", password=" + password + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
+		return "UserDto [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
+				+ username + ", password=" + password + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
 	}
+
+
+
+
+
      
 	
     

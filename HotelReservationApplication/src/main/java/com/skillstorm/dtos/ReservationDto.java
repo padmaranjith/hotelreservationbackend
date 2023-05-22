@@ -10,7 +10,7 @@ import com.skillstorm.models.User;
 
 public class ReservationDto {
 	
-    private int id;
+    private long id;
 	
     private ZonedDateTime  checkInDate;
 	
@@ -26,7 +26,7 @@ public class ReservationDto {
 	
     private int roomId;
 	
-    private Long userId;
+    private long userId;
 
     
 	public ReservationDto() {
@@ -34,8 +34,8 @@ public class ReservationDto {
 	}
 
 
-	public ReservationDto(int id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
-			ZonedDateTime bookingDate, BigDecimal totalPrice, String reservationStatus, int roomId, Long userId) {
+	public ReservationDto(long id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
+			ZonedDateTime bookingDate, BigDecimal totalPrice, String reservationStatus, int roomId, long userId) {
 		super();
 		this.id = id;
 		this.checkInDate = checkInDate;
@@ -49,12 +49,12 @@ public class ReservationDto {
 	}
 
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -129,15 +129,18 @@ public class ReservationDto {
 	}
 
 
-	public Long getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
 
-	public void setUserId(Long userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
+	
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -159,7 +162,7 @@ public class ReservationDto {
 				&& Objects.equals(checkOutDate, other.checkOutDate) && id == other.id
 				&& Objects.equals(numGuests, other.numGuests)
 				&& Objects.equals(reservationStatus, other.reservationStatus) && roomId == other.roomId
-				&& Objects.equals(totalPrice, other.totalPrice) && Objects.equals(userId, other.userId);
+				&& Objects.equals(totalPrice, other.totalPrice) && userId == other.userId;
 	}
 
 
@@ -169,6 +172,9 @@ public class ReservationDto {
 				+ ", numGuests=" + numGuests + ", bookingDate=" + bookingDate + ", totalPrice=" + totalPrice
 				+ ", reservationStatus=" + reservationStatus + ", roomId=" + roomId + ", userId=" + userId + "]";
 	}
+
+
+
 
 	
 	

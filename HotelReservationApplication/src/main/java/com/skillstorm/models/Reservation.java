@@ -22,7 +22,7 @@ public class Reservation {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "reservation_id")
-    private int id;
+    private long id;
 	
 	@Column(name = "check_in_date")
     private ZonedDateTime  checkInDate;
@@ -54,7 +54,7 @@ public class Reservation {
 		
 	}
 	
-	public Reservation(int id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
+	public Reservation(long id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
 			ZonedDateTime bookingDate, BigDecimal totalPrice, String reservationStatus, Room room, User user) {
 		super();
 		this.id = id;
@@ -69,11 +69,11 @@ public class Reservation {
 	}
 	
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -142,7 +142,7 @@ public class Reservation {
 	}
 
 	public ReservationDto toDto() {
-		return new ReservationDto(id, checkInDate, checkOutDate, numGuests, bookingDate, totalPrice, reservationStatus, room.getRoomId(), user.getId());
+		return new ReservationDto(id, checkInDate, checkOutDate, numGuests, bookingDate, totalPrice, reservationStatus, room.getRoomId(), user.getUserId());
 	}
 	
 	@Override
@@ -159,7 +159,7 @@ public class Reservation {
 		if (getClass() != obj.getClass())
 			return false;
 		Reservation other = (Reservation) obj;
-		return Objects.equals(id, other.id);
+		return id == other.id;
 	}
 
 	@Override

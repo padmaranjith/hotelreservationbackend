@@ -17,28 +17,30 @@ public class UserService {
     private IUserRepository userRepository;
 
 	public List<UserDto> getAllUsers() {
-		// TODO Auto-generated method stub
-		return null;
+		return userRepository.findAll()
+				.stream()
+				.map(user->user.toDto())
+				.toList();
 	}
-
-	public UserDto getUserById(Long id) {
-		return userRepository.findById(id)
+	
+	public UserDto getUserByUserId(Long userId) {
+		return userRepository.findById(userId)
 				.orElseThrow()
 				.toDto();
 	}
 
 	public UserDto createUser(@Valid UserDto userData) {
-		User user = new User(userData.getId(),userData.getFirstName(), userData.getLastName(), userData.getUsername(),userData.getPassword(),userData.getEmail(),userData.getPhoneNumber());
+		User user = new User(userData.getUserId(),userData.getFirstName(), userData.getLastName(), userData.getUsername(),userData.getPassword(),userData.getEmail(),userData.getPhoneNumber());
 		return userRepository.save(user).toDto();
 	}
 
 	public UserDto updateUser(UserDto userData) {
-		// TODO Auto-generated method stub
-		return null;
+		User user = new User(userData.getUserId(),userData.getFirstName(), userData.getLastName(), userData.getUsername(),userData.getPassword(),userData.getEmail(),userData.getPhoneNumber());
+		return userRepository.save(user).toDto();
 	}
 
-	public void deleteUser(long id) {
-		// TODO Auto-generated method stub
+	public void deleteUser(long userId) {
+		userRepository.deleteById(userId);
 		
 	}
 	

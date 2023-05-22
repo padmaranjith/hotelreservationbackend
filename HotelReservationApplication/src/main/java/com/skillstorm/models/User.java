@@ -11,13 +11,27 @@ import javax.persistence.Table;
 
 import com.skillstorm.dtos.UserDto;
 
+/**
+ * 
+ * User entity represents all information, including id first name, last name,
+ * user name, password, email, and phone number
+ *
+ */
+
+
 @Entity
 @Table(name = "users")
 public class User {
+	
+	/**
+	 * Unique Identifier for the user.
+	 * This field is automatically generated and cannot be modified directly
+	 */	
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-    private Long id;
+    private long userId;
 	
 	@Column(name = "first_name")
     private String firstName;
@@ -40,11 +54,23 @@ public class User {
     public User() {
 		
 	}
+    
+	/**
+	 * Creates a new user object with all the specified fields
+	 * 
+	 * @param userId
+	 * @param firstName
+	 * @param lastName
+	 * @param username
+	 * @param password
+	 * @param email
+	 * @param phoneNumber
+	 */
 	
-	public User(Long id, String firstName, String lastName, String username, String password, String email,
+	public User(long userId, String firstName, String lastName, String username, String password, String email,
 			String phoneNumber) {
 		super();
-		this.id = id;
+		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
@@ -53,12 +79,14 @@ public class User {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Long getId() {
-		return id;
+	
+
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public String getFirstName() {
@@ -110,12 +138,12 @@ public class User {
 	}
 
 	public UserDto toDto() {
-		return new UserDto(id, firstName, lastName, username, password, email, phoneNumber);
+		return new UserDto(userId, firstName, lastName, username, password, email, phoneNumber);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		return Objects.hash(userId);
 	}
 
 	@Override
@@ -127,15 +155,17 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(id, other.id);
+		return userId == other.userId;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", password=" + password + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
+		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
+				+ username + ", password=" + password + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
 	}
 
+
+	
 	
     
 }
