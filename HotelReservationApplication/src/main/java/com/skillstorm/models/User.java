@@ -1,5 +1,6 @@
 package com.skillstorm.models;
 
+import java.util.Collection;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.skillstorm.dtos.UserDto;
 
@@ -21,7 +25,7 @@ import com.skillstorm.dtos.UserDto;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements UserDetails {
 	
 	/**
 	 * Unique Identifier for the user.
@@ -162,6 +166,41 @@ public class User {
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", username="
 				+ username + ", password=" + password + ", email=" + email + ", phoneNumber=" + phoneNumber + "]";
+	}
+	
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
+	}
+
+	/**
+	 * Returns authority in case a role and authority is assigned to the user.
+	 * 
+	 */
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return null;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 
 
