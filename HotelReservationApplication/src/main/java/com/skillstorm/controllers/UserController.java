@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.skillstorm.dtos.UserDto;
 import com.skillstorm.services.UserService;
@@ -40,10 +41,13 @@ public class UserController {
 	
 	@PostMapping
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userData) {
-        UserDto user = userService.createUser(userData);
-        return new ResponseEntity<>(user, HttpStatus.CREATED);
-    }
-	
+        try {
+        	UserDto user = userService.createUser(userData);
+        	return new ResponseEntity<>(user, HttpStatus.CREATED);
+        	} catch (RuntimeException e) {
+        	  throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        	}
+}
 	@PutMapping("/{userId}")
 	public UserDto updateUser(@PathVariable long userId, @RequestBody UserDto userData) {
 		userData.setUserId(userId);
@@ -54,7 +58,6 @@ public class UserController {
 	public void deleteUser(@PathVariable long userId) {
 		userService.deleteUser(userId);
 	}
-	
 	
 
 }

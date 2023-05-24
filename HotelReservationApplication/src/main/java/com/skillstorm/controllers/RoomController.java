@@ -22,4 +22,7 @@ public class RoomController {
 	public List<RoomDto> getAllRoomsInHotel(@PathVariable("hotelId") int hotelId){
 		return roomService.getAllRoomsInHotel(hotelId);
 	}
+	
+	
+	
 }
