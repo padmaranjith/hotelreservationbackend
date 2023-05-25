@@ -1,6 +1,7 @@
 package com.skillstorm.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.skillstorm.dtos.HotelDto;
 import com.skillstorm.models.Amenities;
+import com.skillstorm.models.Hotel;
 import com.skillstorm.models.Location;
 import com.skillstorm.repositories.IAmenitiesRepository;
 import com.skillstorm.repositories.IHotelRepository;
@@ -54,6 +56,10 @@ public class HotelService {
 	
 	public List<Amenities> getAllAmenitiesInHotel(int hotelId){
 		return amenitiesRepository.findAllByHotelHotelId(hotelId);
+	}
+	
+	public Optional<Hotel> getHotelById(int hotelId) {
+		return hotelRepository.findById(hotelId);
 	}
 	
 }
