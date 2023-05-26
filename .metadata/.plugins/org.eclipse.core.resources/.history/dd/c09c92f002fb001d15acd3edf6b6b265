@@ -1,0 +1,18 @@
+spring.datasource.url=jdbc:postgresql://cp-hotelreservation-project2-db.c4eqo06kg56i.us-east-1.rds.amazonaws.com:5432/cp_hoteldb
+spring.datasource.username=postgres
+spring.datasource.password=passwordcp
+spring.jpa.hibernate.ddl-auto=update
+
+# SMTP server configuration
+spring.mail.host=smtp.example.com
+spring.mail.port=25
+spring.mail.username=setusername
+spring.mail.password=setpassword
+spring.mail.protocol=smtp
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+
+
+
+
+
