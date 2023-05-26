@@ -1,0 +1,5 @@
+package com.skillstorm.configuration;
+
+public class SecurityConfig {
+
+}

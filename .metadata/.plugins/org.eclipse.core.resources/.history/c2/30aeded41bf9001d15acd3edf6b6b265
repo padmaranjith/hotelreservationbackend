@@ -1,0 +1,38 @@
+package com.skillstorm.configuration;
+
+import org.springframework.context.annotation.Bean;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+//@EnableGlobalMethodSecurity(jsr250Enabled = true, prePostEnabled = true)
+public class SecurityConfig {
+
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+		
+		httpSecurity
+        .authorizeRequests()
+        .mvcMatchers(HttpMethod.POST,"/users").permitAll()
+        
+        .anyRequest().permitAll();
+        //.anyRequest().authenticated();
+           // .antMatchers("/public/**").permitAll()
+           // .antMatchers("/private/**").authenticated();
+		
+		httpSecurity.httpBasic();
+		httpSecurity.csrf().disable();
+		return httpSecurity.build();
+	}
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder(10);
+	}
+	
+}
