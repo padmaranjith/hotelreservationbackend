@@ -1,5 +1,16 @@
+#version: 0.2
+#phases:
+# build:
+#  commands: 
+#  - mvn clean install
+# post_build:
+#  commands:
+#  - mv target/HotelReservationApplication-0.0.1-SNAPSHOT.jar HotelReservationApplication-0.0.1-SNAPSHOT.jar
+#artifacts:
+#  files:
+#  - HotelReservationApplication-0.0.1-SNAPSHOT.jar   
+#  
 version: 0.2
-
 phases:
   pre_build:
     commands:
@@ -14,4 +25,8 @@ phases:
 artifacts:
   files:
     - target/*.jar
+    - scripts/**/*
 
+cache:
+  paths:
+    - '/root/.m2/**/*'
