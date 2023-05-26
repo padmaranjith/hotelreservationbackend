@@ -2,11 +2,14 @@ package com.skillstorm.controllers;
 
 import java.util.List;
 
+import javax.naming.AuthenticationException;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.skillstorm.dtos.SignInRequest;
 import com.skillstorm.dtos.UserDto;
+import com.skillstorm.models.User;
 import com.skillstorm.services.UserService;
 
 @RestController
@@ -58,6 +63,14 @@ public class UserController {
 	public void deleteUser(@PathVariable long userId) {
 		userService.deleteUser(userId);
 	}
-	
 
+	@PostMapping("/signin")
+    public ResponseEntity<UserDto> signInUser(@RequestBody SignInRequest signInRequest) {
+        try {
+            UserDto user = userService.signInUser(signInRequest.getUsername(), signInRequest.getPassword());
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
 }
