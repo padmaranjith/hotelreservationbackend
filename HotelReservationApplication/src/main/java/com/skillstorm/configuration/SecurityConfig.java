@@ -14,16 +14,30 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		
+//		httpSecurity
+//        .authorizeRequests()
+//        .mvcMatchers("/users").permitAll()
+//        .mvcMatchers("/users").authenticated();
+//      .anyRequest().permitAll();
+//		
+//		httpSecurity.httpBasic();
+//		httpSecurity.csrf().disable();
+//		return httpSecurity.build();
 		httpSecurity
         .authorizeRequests()
-        .mvcMatchers("/users").permitAll()
+        .mvcMatchers("/users", "/register").permitAll()
         .mvcMatchers("/users").authenticated()
-        .anyRequest().permitAll();
-		
-		httpSecurity.httpBasic();
-		httpSecurity.csrf().disable();
-		return httpSecurity.build();
+		.anyRequest().permitAll() 
+        .and()
+        .formLogin()
+        .and()
+        .httpBasic()
+        .and()
+        .csrf().disable();
+
+    return httpSecurity.build();
 	}
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder(10);

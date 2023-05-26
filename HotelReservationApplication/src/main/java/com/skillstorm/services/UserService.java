@@ -69,10 +69,29 @@ public class UserService implements UserDetailsService{
 		
 		User user= userRepository.findByUsername(username)
 				.orElseThrow(()->new UsernameNotFoundException(username + "not found."));
-		
 		return user;
 	}
 	
+	public void register(User user) {
+		Optional<User> foundUser = userRepository.findByUsername(user.getUsername());
+		
+		if (foundUser.isPresent()) {
+			throw new RuntimeException("The username is already taken, please try another one");
+		}
+		userRepository.save(user); 
+	}
+
+	public UserDto signInUser(String username, String password) {
+		// Check if the user exists
+		User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Invalid username or password"));
+
+        // Validate the password
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("Invalid username or password");
+        }
+        return user.toDto();
+	}
 	
 	
 

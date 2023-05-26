@@ -83,7 +83,15 @@ public class User implements UserDetails {
 		this.phoneNumber = phoneNumber;
 	}
 
-	
+	public User(String firstName, String lastName, String username, String password, String email, String phoneNumber) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+	}
 
 	public long getUserId() {
 		return userId;
