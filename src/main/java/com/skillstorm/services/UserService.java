@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService{
 	
 	public UserDto getUserByUserId(Long userId) {
 		return userRepository.findById(userId)
-				.orElseThrow()
+				.orElseThrow((()->new RuntimeException("User not found")))
 				.toDto();
 	}
 

@@ -40,7 +40,7 @@ public class ReservationService {
 	
 	public ReservationDto getReservationById(long id) {
 		return reservationRepository.getReservationById(id)
-				.orElseThrow()
+				.orElseThrow((()->new RuntimeException("reservation not found")))
 				.toDto();
 	}
 
