@@ -8,4 +8,4 @@ phases:
   - mv target/HotelReservationApplication-0.0.1-SNAPSHOT.jar HotelReservationApplication-0.0.1-SNAPSHOT.jar
 artifacts:
   files:
-  - HotelReservationApplication-0.0.1-SNAPSHOT.jar
+  - HotelReservationApplication-0.0.1-SNAPSHOT.jar 
