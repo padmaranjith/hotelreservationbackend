@@ -1,0 +1,33 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
+        with:
+          java-version: '8'
+
+      - name: Build and package
+        run: mvn clean install
+
+      - name: Deploy to Elastic Beanstalk
+        uses: einaregilsson/beanstalk-deploy@v18
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          region: ${{ secrets.AWS_REGION }}
+          application_name: cp-project2-v1-elasticbeanstalk
+          environment_name: Cp-project2-v1-elasticbeanstalk-env
+          version_label: HotelReservationApplication-0.0.1-SNAPSHOT.jar
+          source_bundle: target/HotelReservationApplication-0.0.1-SNAPSHOT.jar
