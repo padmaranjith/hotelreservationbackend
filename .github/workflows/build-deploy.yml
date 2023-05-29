@@ -1,33 +1,42 @@
-name: Build and Deploy
-
+name: Deployment
 on:
   push:
     branches:
       - main
-
+ 
 jobs:
-  build-and-deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 8
-        uses: actions/setup-java@v2
+      - uses: actions/checkout@v1
+      - name: Set up JDK
+        uses: actions/setup-java@v1
         with:
           java-version: '8'
-
-      - name: Build and package
-        run: mvn clean install
-
-      - name: Deploy to Elastic Beanstalk
-        uses: einaregilsson/beanstalk-deploy@v18
+      - name: Build with Maven
+        run: mvn -B package -DskipTests --file pom.xml
+      - name: Upload JAR
+        uses: actions/upload-artifact@v2
         with:
-          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
-          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
-          region: ${{ secrets.AWS_REGION }}
+          name: artifact
+          path: target/HotelReservationApplication-0.0.1-SNAPSHOT.jar   
+  deploy:
+    needs: build
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download JAR
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact
+      #Deploy the artifact (JAR) into AWS Beanstalk
+      - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v13
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}                 
           application_name: cp-project2-v1-elasticbeanstalk
           environment_name: Cp-project2-v1-elasticbeanstalk-env
-          version_label: HotelReservationApplication-0.0.1-SNAPSHOT.jar
-          source_bundle: target/HotelReservationApplication-0.0.1-SNAPSHOT.jar
+          region: ${{ secrets.AWS_REGION }}
+          deployment_package: HotelReservationApplication-0.0.1-SNAPSHOT.jar 
