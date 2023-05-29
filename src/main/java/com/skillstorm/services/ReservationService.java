@@ -35,7 +35,7 @@ public class ReservationService {
 		return reservationRepository.findAll()
 				.stream()
 				.map(reservation->reservation.toDto())
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	public ReservationDto getReservationById(long id) {

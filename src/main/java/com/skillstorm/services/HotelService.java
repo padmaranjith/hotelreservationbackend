@@ -2,6 +2,7 @@ package com.skillstorm.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -33,7 +34,7 @@ public class HotelService {
 		return hotelRepository.findAll()
 				.stream()
 				.map(hotel->hotel.toDto())
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	public List<HotelDto> getHotelsByLocation(String locationName){

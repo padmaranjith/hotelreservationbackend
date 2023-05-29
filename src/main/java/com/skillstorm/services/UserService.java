@@ -2,6 +2,7 @@ package com.skillstorm.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -28,7 +29,7 @@ public class UserService implements UserDetailsService{
 		return userRepository.findAll()
 				.stream()
 				.map(user->user.toDto())
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	public UserDto getUserByUserId(Long userId) {
