@@ -46,13 +46,13 @@ public class HotelService {
 			return hotelRepository.findAllByLocationId(location.getId())
 					.stream()
 					.map(hotel->hotel.toDto())
-					.toList();	
+					.collect(Collectors.toList());	
 			}
 		else {
 			return hotelRepository.findAll()
 					.stream()
 					.map(hotel->hotel.toDto())
-					.toList();		}
+					.collect(Collectors.toList());		}
 	}
 	
 	public List<Amenities> getAllAmenitiesInHotel(int hotelId){

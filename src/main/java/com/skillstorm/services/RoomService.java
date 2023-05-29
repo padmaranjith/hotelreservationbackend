@@ -33,7 +33,7 @@ public class RoomService {
 	
 	public RoomDto getRoomByRoomId(int roomId) {
 		return roomRepository.findById(roomId)
-				.orElseThrow()
+				.orElseThrow((()->new RuntimeException("Room not found")))
 				.toDto();
 	}
 	
