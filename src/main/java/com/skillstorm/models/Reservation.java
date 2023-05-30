@@ -3,6 +3,7 @@ package com.skillstorm.models;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -25,16 +26,19 @@ public class Reservation {
     private long id;
 	
 	@Column(name = "check_in_date")
-    private ZonedDateTime  checkInDate;
+//    private ZonedDateTime  checkInDate;
+	private Date  checkInDate;
 	
 	@Column(name = "check_out_date")
-    private ZonedDateTime  checkOutDate;
+//    private ZonedDateTime  checkOutDate;
+	private Date checkOutDate;
 	
 	@Column(name = "num_guests")
     private Integer numGuests;
 	
 	@Column(name = "booking_date")
-    private ZonedDateTime  bookingDate;
+//    private ZonedDateTime  bookingDate;
+	 private Date  bookingDate;
 	
 	@Column(name = "total_price")
 	private BigDecimal totalPrice;
@@ -54,8 +58,8 @@ public class Reservation {
 		
 	}
 	
-	public Reservation(long id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
-			ZonedDateTime bookingDate, BigDecimal totalPrice, String reservationStatus, Room room, User user) {
+	public Reservation(long id, Date checkInDate, Date checkOutDate, Integer numGuests, Date bookingDate,
+			BigDecimal totalPrice, String reservationStatus, Room room, User user) {
 		super();
 		this.id = id;
 		this.checkInDate = checkInDate;
@@ -77,19 +81,19 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public ZonedDateTime getCheckInDate() {
+	public Date getCheckInDate() {
 		return checkInDate;
 	}
 
-	public void setCheckInDate(ZonedDateTime checkInDate) {
+	public void setCheckInDate(Date checkInDate) {
 		this.checkInDate = checkInDate;
 	}
 
-	public ZonedDateTime getCheckOutDate() {
+	public Date getCheckOutDate() {
 		return checkOutDate;
 	}
 
-	public void setCheckOutDate(ZonedDateTime checkOutDate) {
+	public void setCheckOutDate(Date checkOutDate) {
 		this.checkOutDate = checkOutDate;
 	}
 
@@ -101,11 +105,11 @@ public class Reservation {
 		this.numGuests = numGuests;
 	}
 
-	public ZonedDateTime getBookingDate() {
+	public Date getBookingDate() {
 		return bookingDate;
 	}
 
-	public void setBookingDate(ZonedDateTime bookingDate) {
+	public void setBookingDate(Date bookingDate) {
 		this.bookingDate = bookingDate;
 	}
 

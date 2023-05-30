@@ -73,9 +73,14 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<ReservationDto> createReservation(@Valid @RequestBody ReservationDto reservationData){
     	
+    	System.out.println("Creating reservation...");
+    	
     	long userId=reservationData.getUserId();
     	int roomId=reservationData.getRoomId();
     	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+    	
+    	System.out.println("UserId"+userId);
+    	System.out.println("Roomid "+roomId);
     	
     	if(Objects.nonNull(userId)&& Objects.nonNull(roomId)) {
     		ReservationDto reservation = reservationService.createReservation(reservationData);
@@ -101,8 +106,10 @@ public class ReservationController {
             + "We are pleased to confirm your reservation details."
             +"\n\nYour Booking Summary"
             
-            +"\n\nCheck In Date : "+reservation.getCheckInDate().format(formatter)
-            +"\nCheck Out Date : "+reservation.getCheckOutDate().format(formatter)
+//            +"\n\nCheck In Date : "+reservation.getCheckInDate().format(formatter)
+//            +"\nCheck Out Date : "+reservation.getCheckOutDate().format(formatter)
+            +"\n\nCheck In Date : "+reservation.getCheckInDate()
+            +"\nCheck Out Date : "+reservation.getCheckOutDate()
             +"\nNumber of Guests :"+reservation.getNumGuests()
             +"\nRoom Type: "+room.getRoomType()
             +"\nTotal Price : "+reservation.getTotalPrice()

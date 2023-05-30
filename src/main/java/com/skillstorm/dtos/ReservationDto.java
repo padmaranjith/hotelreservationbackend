@@ -2,6 +2,7 @@ package com.skillstorm.dtos;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 import com.skillstorm.models.Room;
@@ -12,13 +13,19 @@ public class ReservationDto {
 	
     private long id;
 	
-    private ZonedDateTime  checkInDate;
+//    private ZonedDateTime  checkInDate;
+//	
+//    private ZonedDateTime  checkOutDate;
+    
+    
+    private Date  checkInDate;
 	
-    private ZonedDateTime  checkOutDate;
+    private Date  checkOutDate;
 	
     private Integer numGuests;
 	
-    private ZonedDateTime  bookingDate;
+//    private ZonedDateTime  bookingDate;
+    private Date  bookingDate;
     
     private BigDecimal totalPrice;
 	
@@ -34,8 +41,10 @@ public class ReservationDto {
 	}
 
 
-	public ReservationDto(long id, ZonedDateTime checkInDate, ZonedDateTime checkOutDate, Integer numGuests,
-			ZonedDateTime bookingDate, BigDecimal totalPrice, String reservationStatus, int roomId, long userId) {
+	
+
+	public ReservationDto(long id, Date checkInDate, Date checkOutDate, Integer numGuests, Date bookingDate,
+			BigDecimal totalPrice, String reservationStatus, int roomId, long userId) {
 		super();
 		this.id = id;
 		this.checkInDate = checkInDate;
@@ -49,6 +58,8 @@ public class ReservationDto {
 	}
 
 
+
+
 	public long getId() {
 		return id;
 	}
@@ -59,25 +70,7 @@ public class ReservationDto {
 	}
 
 
-	public ZonedDateTime getCheckInDate() {
-		return checkInDate;
-	}
-
-
-	public void setCheckInDate(ZonedDateTime checkInDate) {
-		this.checkInDate = checkInDate;
-	}
-
-
-	public ZonedDateTime getCheckOutDate() {
-		return checkOutDate;
-	}
-
-
-	public void setCheckOutDate(ZonedDateTime checkOutDate) {
-		this.checkOutDate = checkOutDate;
-	}
-
+	
 
 	public Integer getNumGuests() {
 		return numGuests;
@@ -89,14 +82,46 @@ public class ReservationDto {
 	}
 
 
-	public ZonedDateTime getBookingDate() {
+	public Date getCheckInDate() {
+		return checkInDate;
+	}
+
+
+
+
+	public void setCheckInDate(Date checkInDate) {
+		this.checkInDate = checkInDate;
+	}
+
+
+
+
+	public Date getCheckOutDate() {
+		return checkOutDate;
+	}
+
+
+
+
+	public void setCheckOutDate(Date checkOutDate) {
+		this.checkOutDate = checkOutDate;
+	}
+
+
+
+
+	public Date getBookingDate() {
 		return bookingDate;
 	}
 
 
-	public void setBookingDate(ZonedDateTime bookingDate) {
+
+
+	public void setBookingDate(Date bookingDate) {
 		this.bookingDate = bookingDate;
 	}
+
+
 
 
 	public BigDecimal getTotalPrice() {

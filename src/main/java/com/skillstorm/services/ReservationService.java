@@ -1,5 +1,6 @@
 package com.skillstorm.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -77,7 +78,8 @@ public class ReservationService {
 		 	reservation.setRoom(room);
 		 	reservation.setCheckInDate(reservationData.getCheckInDate());
 		 	reservation.setCheckOutDate(reservationData.getCheckOutDate());
-		 	reservation.setBookingDate(reservationData.getBookingDate());
+//		 	reservation.setBookingDate(reservationData.getBookingDate());
+		 	reservation.setBookingDate(new Date());
 		 	reservation.setNumGuests(reservationData.getNumGuests());
 		 	reservation.setTotalPrice(reservationData.getTotalPrice());
 		 	reservation.setReservationStatus(reservationData.getReservationStatus());

@@ -25,8 +25,9 @@ public class SecurityConfig {
 //		return httpSecurity.build();
 		httpSecurity
         .authorizeRequests()
-        .mvcMatchers("/users", "/register").permitAll()
-        .mvcMatchers("/users").authenticated()
+        .mvcMatchers("/users").permitAll()
+//        .mvcMatchers("/users", "/register").permitAll()
+//        .mvcMatchers("/users").authenticated()
 		.anyRequest().permitAll() 
         .and()
         .formLogin()

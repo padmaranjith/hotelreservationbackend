@@ -1,6 +1,7 @@
 package com.skillstorm.repositories;
 
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,7 +24,7 @@ public interface IReservationRepository extends JpaRepository<Reservation, Long>
 	List<Reservation> findByUser_UserId(long userId);
 
 	@Query("select r from Reservation r where r.room = :roomId and r.checkInDate >= :checkInDate and r.checkOutDate <= :checkOutDate")
-	List<Reservation> findConflictingReservations(@Param("roomId")Room roomId, @Param("checkInDate") ZonedDateTime checkInDate, @Param("checkOutDate") ZonedDateTime checkOutDate);
+	List<Reservation> findConflictingReservations(@Param("roomId")Room roomId, @Param("checkInDate") Date checkInDate, @Param("checkOutDate") Date checkOutDate);
 
 	Optional<Reservation> findById(long id);
 
