@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.skillstorm.dtos.ReservationDto;
 import com.skillstorm.models.Reservation;
 import com.skillstorm.models.Room;
 import com.skillstorm.models.User;
@@ -30,6 +31,7 @@ public interface IReservationRepository extends JpaRepository<Reservation, Long>
 
 	Optional<Reservation> getReservationById(long id);
 	
+ 	
 //  @Lock(LockModeType.PESSIMISTIC_WRITE)
 //  @Query("select r from reservations r where r.reservation_id = :id")
 //  Optional<Reservation> findByIdWithLock(@Param("id") Long id);

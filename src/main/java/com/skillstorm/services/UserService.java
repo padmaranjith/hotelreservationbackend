@@ -7,14 +7,19 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import com.skillstorm.models.Reservation;
 import com.skillstorm.models.User;
+import com.skillstorm.dtos.ReservationDto;
 import com.skillstorm.dtos.UserDto;
+import com.skillstorm.repositories.IReservationRepository;
 import com.skillstorm.repositories.IUserRepository;
 
 @Service
@@ -24,6 +29,13 @@ public class UserService implements UserDetailsService{
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private ReservationService reservationService;
+	
+	@Autowired
+    private IReservationRepository reservationRepository;
+
 	
 	public List<UserDto> getAllUsers() {
 		return userRepository.findAll()
@@ -46,7 +58,8 @@ public class UserService implements UserDetailsService{
 		//If user with the username already exists
 		if(foundUser.isPresent()) {
 			System.out.println("User name already taken");
-			throw new RuntimeException("Username is already taken");
+//			throw new RuntimeException("Username is already taken");
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username is already taken");
 		}else {
 			System.out.println("Creating user..");
 			String password=passwordEncoder.encode(userData.getPassword());
@@ -93,6 +106,36 @@ public class UserService implements UserDetailsService{
         }
         return user.toDto();
 	}
+	
+	public List<Reservation> logInUser(String username, String password) {
+		// Check if the user exists
+		User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Invalid username or password"));
+		System.out.println(user.getUsername()+ user.getPassword());
+		List<Reservation> userReservations = reservationRepository.findByUser_UserId(user.getUserId());
+
+        // Validate the password
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new RuntimeException("Invalid username or password");
+        }
+        
+        
+        return userReservations;
+	}
+	
+	
+	
+//
+//	public UserDto getUserByUserName(String username) {
+//		return userRepository.findByUsername(username)
+//            .orElseThrow(() -> new RuntimeException("User not found"))
+//            .toDto();
+//	}
+//	
+//	public Long getUserIdByUsername(String username) {
+//	    return userRepository.findUserIdByUsername(username)
+//	            .orElseThrow(() -> new RuntimeException("User not found"));
+//	}
 	
 	
 

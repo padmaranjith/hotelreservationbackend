@@ -23,6 +23,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.skillstorm.dtos.SignInRequest;
 import com.skillstorm.dtos.UserDto;
+import com.skillstorm.models.Reservation;
 import com.skillstorm.models.User;
 import com.skillstorm.services.UserService;
 
@@ -43,7 +44,17 @@ public class UserController {
     public UserDto getUserById(@PathVariable long userId) {
         return userService.getUserByUserId(userId);
     }
-	
+//	
+//	@GetMapping("/username/{username}")
+//	public UserDto getUserByUsername(@PathVariable String username) {
+//		return userService.getUserByUserName(username);
+//	}
+//	
+//	@GetMapping("/username/{username}/userId")
+//	public Long getUserIdByUsername(@PathVariable String username) {
+//		return userService.getUserIdByUsername(username);
+//	}
+//	
 	@PostMapping
     public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userData) {
         try {
@@ -68,9 +79,23 @@ public class UserController {
     public ResponseEntity<UserDto> signInUser(@RequestBody SignInRequest signInRequest) {
         try {
             UserDto user = userService.signInUser(signInRequest.getUsername(), signInRequest.getPassword());
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            
+                        return new ResponseEntity<>(user, HttpStatus.OK);
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
+	
+	@PostMapping("/login")
+	 public ResponseEntity<List<Reservation>> LoginInUser(@RequestBody SignInRequest signInRequest) {
+        try {
+            List<Reservation> userReservations = userService.logInUser(signInRequest.getUsername(), signInRequest.getPassword());
+            
+           
+            
+            return new ResponseEntity<>(userReservations, HttpStatus.OK);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    } 
 }
