@@ -2,6 +2,7 @@ package com.skillstorm.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -27,12 +28,12 @@ public class RoomService {
 		return roomRepository.findAllByHotelHotelId(hotelId)
 				.stream()
 				.map(room->room.toDto())
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	public RoomDto getRoomByRoomId(int roomId) {
 		return roomRepository.findById(roomId)
-				.orElseThrow()
+				.orElseThrow((()->new RuntimeException("Room not found")))
 				.toDto();
 	}
 	

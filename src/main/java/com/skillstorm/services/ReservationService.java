@@ -36,12 +36,12 @@ public class ReservationService {
 		return reservationRepository.findAll()
 				.stream()
 				.map(reservation->reservation.toDto())
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	public ReservationDto getReservationById(long id) {
 		return reservationRepository.getReservationById(id)
-				.orElseThrow()
+				.orElseThrow((()->new RuntimeException("reservation not found")))
 				.toDto();
 	}
 

@@ -2,6 +2,7 @@ package com.skillstorm.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -28,12 +29,12 @@ public class UserService implements UserDetailsService{
 		return userRepository.findAll()
 				.stream()
 				.map(user->user.toDto())
-				.toList();
+				.collect(Collectors.toList());
 	}
 	
 	public UserDto getUserByUserId(Long userId) {
 		return userRepository.findById(userId)
-				.orElseThrow()
+				.orElseThrow((()->new RuntimeException("User not found")))
 				.toDto();
 	}
 
@@ -68,7 +69,7 @@ public class UserService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		User user= userRepository.findByUsername(username)
-				.orElseThrow(()->new UsernameNotFoundException(username + "not found."));
+				.orElseThrow(()->new RuntimeException(username + "not found."));
 		return user;
 	}
 	
